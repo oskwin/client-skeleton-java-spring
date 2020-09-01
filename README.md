@@ -32,7 +32,7 @@ Each client skeleton has a default 'ApplicationInitListener' and a default 'Secu
 
 ### Best practices to start with the skeletons
 
-##### (1st) apllication.properties
+##### (1st) application.properties
 Location: `src/main/resources`
 * * Decide the required security level and set the `server.ssl.enabled` and `token.security.filter.enabled` properties accordingly.
 * * If `token.security.filter.enabled` is true, `server.ssl.enabled` also has to be true !!!
