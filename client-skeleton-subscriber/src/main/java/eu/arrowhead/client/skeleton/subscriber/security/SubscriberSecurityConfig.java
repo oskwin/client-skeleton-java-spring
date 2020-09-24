@@ -13,16 +13,16 @@ import eu.arrowhead.common.CommonConstants;
 @Configuration
 @EnableWebSecurity
 public class SubscriberSecurityConfig extends DefaultSecurityConfig {
-	
+
 	//=================================================================================================
 	// members
-	
+
 	@Value(ClientCommonConstants.$TOKEN_SECURITY_FILTER_ENABLED_WD)
 	private boolean tokenSecurityFilterEnabled;
-	
+
 	@Value(CommonConstants.$SERVER_SSL_ENABLED_WD)
 	private boolean sslEnabled;
-	
+
 	private SubscriberTokenSecurityFilter tokenSecurityFilter;
 	private SubscriberNotificationAccessControlFilter notificationFilter;
 
@@ -33,13 +33,18 @@ public class SubscriberSecurityConfig extends DefaultSecurityConfig {
 	@Override
 	protected void configure( final HttpSecurity http) throws Exception {
 		super.configure(http);
-			
-		notificationFilter = new SubscriberNotificationAccessControlFilter();
-		http.addFilterBefore( notificationFilter , SecurityContextHolderAwareRequestFilter.class );
-		
-		if (sslEnabled && tokenSecurityFilterEnabled) {
-			tokenSecurityFilter = new SubscriberTokenSecurityFilter();
-			http.addFilterAfter(tokenSecurityFilter, SecurityContextHolderAwareRequestFilter.class);			
+
+		if (sslEnabled) {
+
+			notificationFilter = new SubscriberNotificationAccessControlFilter();
+			http.addFilterBefore( notificationFilter , SecurityContextHolderAwareRequestFilter.class );
+
+
+			if (tokenSecurityFilterEnabled) {
+				tokenSecurityFilter = new SubscriberTokenSecurityFilter();
+				http.addFilterAfter(tokenSecurityFilter, SecurityContextHolderAwareRequestFilter.class);
+			}
+
 		}
 	}
 
@@ -47,10 +52,10 @@ public class SubscriberSecurityConfig extends DefaultSecurityConfig {
 	public SubscriberTokenSecurityFilter getTokenSecurityFilter() {
 		return tokenSecurityFilter;
 	}
-	
+
 	//-------------------------------------------------------------------------------------------------
 	public SubscriberNotificationAccessControlFilter getNotificationFilter() {
 		return notificationFilter;
 	}
-	
+
 }
