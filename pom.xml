@@ -28,7 +28,8 @@
 	    <module>client-skeleton-provider</module>
 	    <module>client-skeleton-subscriber</module>
 	    <module>client-skeleton-publisher</module>
-  	</modules>
+		<module>client-skeleton-executor</module>
+	</modules>
 		
 	<dependencies>
 		<dependency>
