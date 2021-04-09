@@ -11,7 +11,6 @@ public class SubscriberUtilities {
 
 	//-------------------------------------------------------------------------------------------------
 	public static SubscriptionRequestDTO createSubscriptionRequestDTO(final String eventType, final SystemRequestDTO subscriber, final String notificationUri) {
-		
 		final SubscriptionRequestDTO subscription = new SubscriptionRequestDTO(eventType.toUpperCase(), 
 																			   subscriber, 
 																			   null, 
@@ -19,7 +18,8 @@ public class SubscriberUtilities {
 																			   false, 
 																			   null, 
 																			   null, 
-																			   null);		
+																			   null);
+		
 		return subscription;
 	}
 }

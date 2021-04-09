@@ -66,7 +66,6 @@ public class SubscriberApplicationInitListener extends ApplicationInitListener {
 	//-------------------------------------------------------------------------------------------------
 	@Override
 	protected void customInit(final ContextRefreshedEvent event) {
-
 		//Checking the availability of necessary core systems
 		checkCoreSystemReachability(CoreSystem.SERVICE_REGISTRY);
 
@@ -74,7 +73,6 @@ public class SubscriberApplicationInitListener extends ApplicationInitListener {
 		arrowheadService.updateCoreServiceURIs(CoreSystem.ORCHESTRATOR);
 
 		if (sslEnabled) {
-
 			if (tokenSecurityFilterEnabled) {
 				checkCoreSystemReachability(CoreSystem.AUTHORIZATION);
 
@@ -82,17 +80,14 @@ public class SubscriberApplicationInitListener extends ApplicationInitListener {
 				arrowheadService.updateCoreServiceURIs(CoreSystem.AUTHORIZATION);
 
 				setTokenSecurityFilter();
-
 			} else {
 				logger.info("TokenSecurityFilter in not active");
 			}
 
 			setNotificationFilter();
-
 		}
 
-
-		if ( arrowheadService.echoCoreSystem(CoreSystem.EVENT_HANDLER)) {
+		if (arrowheadService.echoCoreSystem(CoreSystem.EVENT_HANDLER)) {
 			arrowheadService.updateCoreServiceURIs(CoreSystem.EVENT_HANDLER);
 			subscribeToPresetEvents();
 		}
@@ -104,9 +99,8 @@ public class SubscriberApplicationInitListener extends ApplicationInitListener {
 	//-------------------------------------------------------------------------------------------------
 	@Override
 	public void customDestroy() {
-
 		final Map<String, String> eventTypeMap = configEventProperites.getEventTypeURIMap();
-		if( eventTypeMap == null) {
+		if (eventTypeMap == null) {
 			logger.info("No preset events to unsubscribe.");
 		} else {
 			for (final String eventType : eventTypeMap.keySet()) {
@@ -120,7 +114,6 @@ public class SubscriberApplicationInitListener extends ApplicationInitListener {
 
 	//-------------------------------------------------------------------------------------------------
 	private void setTokenSecurityFilter() {
-
 		final PublicKey authorizationPublicKey = arrowheadService.queryAuthorizationPublicKey();
 		if (authorizationPublicKey == null) {
 			throw new ArrowheadException("Authorization public key is null");
@@ -130,7 +123,7 @@ public class SubscriberApplicationInitListener extends ApplicationInitListener {
 		try {
 			keystore = KeyStore.getInstance(sslProperties.getKeyStoreType());
 			keystore.load(sslProperties.getKeyStore().getInputStream(), sslProperties.getKeyStorePassword().toCharArray());
-		} catch (KeyStoreException | NoSuchAlgorithmException | CertificateException | IOException ex) {
+		} catch (final KeyStoreException | NoSuchAlgorithmException | CertificateException | IOException ex) {
 			throw new ArrowheadException(ex.getMessage());
 		}
 		final PrivateKey subscriberPrivateKey = Utilities.getPrivateKey(keystore, sslProperties.getKeyPassword());
@@ -140,15 +133,13 @@ public class SubscriberApplicationInitListener extends ApplicationInitListener {
 		subscriberSecurityConfig.getTokenSecurityFilter().setEventTypeMap( eventTypeMap );
 		subscriberSecurityConfig.getTokenSecurityFilter().setAuthorizationPublicKey(authorizationPublicKey);
 		subscriberSecurityConfig.getTokenSecurityFilter().setMyPrivateKey(subscriberPrivateKey);
-
 	}
 
 	//-------------------------------------------------------------------------------------------------
 	private void subscribeToPresetEvents() {
-
 		final Map<String, String> eventTypeMap = configEventProperites.getEventTypeURIMap();
 
-		if(eventTypeMap == null) {
+		if (eventTypeMap == null) {
 			logger.info("No preset events to subscribe.");
 		} else {
 			final SystemRequestDTO subscriber = new SystemRequestDTO();
@@ -168,8 +159,8 @@ public class SubscriberApplicationInitListener extends ApplicationInitListener {
 
 				try {
 					arrowheadService.subscribeToEventHandler(SubscriberUtilities.createSubscriptionRequestDTO(eventType, subscriber, eventTypeMap.get(eventType)));
-				} catch ( final InvalidParameterException ex) {
-					if( ex.getMessage().contains("Subscription violates uniqueConstraint rules")) {
+				} catch (final InvalidParameterException ex) {
+					if (ex.getMessage().contains("Subscription violates uniqueConstraint rules")) {
 						logger.debug("Subscription is already in DB");
 					}
 				} catch (final Exception ex) {

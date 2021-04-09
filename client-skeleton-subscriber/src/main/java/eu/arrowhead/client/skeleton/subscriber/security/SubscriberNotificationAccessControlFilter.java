@@ -39,9 +39,6 @@ public class SubscriberNotificationAccessControlFilter extends ArrowheadFilter {
 	public void setEventTypeMap( final Map<String, String> eventTypeMap) { this.eventTypeMap = eventTypeMap;}
 	public void setServerCN( final String serverCN) { this.serverCN = serverCN; }
 
-	//=================================================================================================
-	// assistant methods
-
 	//-------------------------------------------------------------------------------------------------
 	@Override
 	public void doFilter(final ServletRequest request, final ServletResponse response, final FilterChain chain) throws IOException, ServletException {
@@ -53,7 +50,7 @@ public class SubscriberNotificationAccessControlFilter extends ArrowheadFilter {
 					
 				if (eventTypeMap != null) {					
 					for (final String notificationUri : eventTypeMap.values()) {						
-						if (requestTarget.endsWith( SubscriberDefaults.DEFAULT_EVENT_NOTIFICATION_BASE_URI + "/" + notificationUri )) {							
+						if (requestTarget.endsWith(SubscriberDefaults.DEFAULT_EVENT_NOTIFICATION_BASE_URI + "/" + notificationUri)) {							
 							checkIfClientIsAnAllowedCoreSystem(getCertificateCNFromRequest(httpRequest), getServerCloudCN(serverCN), allowedCoreSystemsForSendingNotification, requestTarget);
 						}
 					}
@@ -65,6 +62,9 @@ public class SubscriberNotificationAccessControlFilter extends ArrowheadFilter {
 		chain.doFilter(request, response);
 	}
 	
+	//=================================================================================================
+	// assistant methods
+
 	//-------------------------------------------------------------------------------------------------
 	@Nullable
 	private String getCertificateCNFromRequest(final HttpServletRequest request) {

@@ -66,7 +66,6 @@ public class PublisherApplicationInitListener extends ApplicationInitListener {
 	//-------------------------------------------------------------------------------------------------
 	@Override
 	protected void customInit(final ContextRefreshedEvent event) {
-
 		//Checking the availability of necessary core systems
 		checkCoreSystemReachability(CoreSystem.SERVICE_REGISTRY);
 		
@@ -77,13 +76,11 @@ public class PublisherApplicationInitListener extends ApplicationInitListener {
 			arrowheadService.updateCoreServiceURIs(CoreSystem.AUTHORIZATION);			
 		
 			setTokenSecurityFilter();
-		
-		}else {
+		} else {
 			logger.info("TokenSecurityFilter in not active");
 		}
 		
-		if ( arrowheadService.echoCoreSystem(CoreSystem.EVENT_HANDLER) ) {
-			
+		if (arrowheadService.echoCoreSystem(CoreSystem.EVENT_HANDLER)) {
 			arrowheadService.updateCoreServiceURIs(CoreSystem.EVENT_HANDLER);	
 			
 			publishInitStartedEvent();
@@ -103,7 +100,6 @@ public class PublisherApplicationInitListener extends ApplicationInitListener {
 
 	//-------------------------------------------------------------------------------------------------
 	private void setTokenSecurityFilter() {
-
 		final PublicKey authorizationPublicKey = arrowheadService.queryAuthorizationPublicKey();
 		if (authorizationPublicKey == null) {
 			throw new ArrowheadException("Authorization public key is null");
@@ -113,7 +109,7 @@ public class PublisherApplicationInitListener extends ApplicationInitListener {
 		try {
 			keystore = KeyStore.getInstance(sslProperties.getKeyStoreType());
 			keystore.load(sslProperties.getKeyStore().getInputStream(), sslProperties.getKeyStorePassword().toCharArray());
-		} catch (KeyStoreException | NoSuchAlgorithmException | CertificateException | IOException ex) {
+		} catch (final KeyStoreException | NoSuchAlgorithmException | CertificateException | IOException ex) {
 			throw new ArrowheadException(ex.getMessage());
 		}			
 		final PrivateKey publisherPrivateKey = Utilities.getPrivateKey(keystore, sslProperties.getKeyPassword());

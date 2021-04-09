@@ -36,7 +36,7 @@ public class SubscriberController {
 	public void receivePublisherReceivedRequestEvent(@RequestBody final EventDTO event ) {	
 		logger.debug("receivePublisherReceivedRequestEvent started...");
 		
-		if( event.getEventType() == null) {			
+		if (event.getEventType() == null) {			
 			logger.debug("EventType is null.");
 		}
 		
@@ -45,10 +45,10 @@ public class SubscriberController {
 	
 	//-------------------------------------------------------------------------------------------------
 	@PostMapping(path = SubscriberConstants.START_INIT_NOTIFICATION_URI) 
-	public void receivePublsisherStartedInitEvent(@RequestBody final EventDTO event) {
+	public void receivePublisherStartedInitEvent(@RequestBody final EventDTO event) {
 		logger.debug("receivePublsisherStartedInitEvent started... ");
 		
-		if( event.getEventType() == null) {			
+		if (event.getEventType() == null) {			
 			logger.debug("EventType is null.");
 		}
 		
@@ -57,10 +57,10 @@ public class SubscriberController {
 	
 	//-------------------------------------------------------------------------------------------------
 	@PostMapping(path = SubscriberConstants.START_RUN_NOTIFICATION_URI) 
-	public void receivePublsisherStartedRunEvent(@RequestBody final EventDTO event ) {
+	public void receivePublisherStartedRunEvent(@RequestBody final EventDTO event ) {
 		logger.debug("receivePublsisherStartedRunEvent started... ");
 		
-		if( event.getEventType() == null) {			
+		if (event.getEventType() == null) {			
 			logger.debug("EventType is null.");
 		}
 		

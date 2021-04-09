@@ -47,7 +47,6 @@ public class PublisherService {
 	//-------------------------------------------------------------------------------------------------
 	//Sample implementation of event publishing of preset event types
 	public void publish(final PresetEventType eventType, final Map<String, String> metadata, final String payload) {
-		
 		final EventPublishRequestDTO request = getPublishRequest(eventType, metadata, payload);
 		arrowheadService.publishToEventHandler(request);
 	}
