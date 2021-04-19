@@ -67,7 +67,7 @@ public class PublisherApplicationInitListener extends ApplicationInitListener {
 	@Override
 	protected void customInit(final ContextRefreshedEvent event) {
 		//Checking the availability of necessary core systems
-		checkCoreSystemReachability(CoreSystem.SERVICE_REGISTRY);
+		checkCoreSystemReachability(CoreSystem.SERVICEREGISTRY);
 		
 		if (sslEnabled && tokenSecurityFilterEnabled) {
 			checkCoreSystemReachability(CoreSystem.AUTHORIZATION);			
@@ -80,8 +80,8 @@ public class PublisherApplicationInitListener extends ApplicationInitListener {
 			logger.info("TokenSecurityFilter in not active");
 		}
 		
-		if (arrowheadService.echoCoreSystem(CoreSystem.EVENT_HANDLER)) {
-			arrowheadService.updateCoreServiceURIs(CoreSystem.EVENT_HANDLER);	
+		if (arrowheadService.echoCoreSystem(CoreSystem.EVENTHANDLER)) {
+			arrowheadService.updateCoreServiceURIs(CoreSystem.EVENTHANDLER);	
 			
 			publishInitStartedEvent();
 		}

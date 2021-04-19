@@ -52,7 +52,7 @@ public class ProviderApplicationInitListener extends ApplicationInitListener {
 	protected void customInit(final ContextRefreshedEvent event) {
 
 		//Checking the availability of necessary core systems
-		checkCoreSystemReachability(CoreSystem.SERVICE_REGISTRY);
+		checkCoreSystemReachability(CoreSystem.SERVICEREGISTRY);
 		if (sslEnabled && tokenSecurityFilterEnabled) {
 			checkCoreSystemReachability(CoreSystem.AUTHORIZATION);			
 
