@@ -30,7 +30,7 @@ public class PublisherSecurityConfig extends DefaultSecurityConfig {
 		super.configure(http);
 		if (tokenSecurityFilterEnabled) {
 			tokenSecurityFilter = new PublisherTokenSecurityFilter();
-		http.addFilterAfter(tokenSecurityFilter, SecurityContextHolderAwareRequestFilter.class);			
+			http.addFilterAfter(tokenSecurityFilter, SecurityContextHolderAwareRequestFilter.class);			
 		}
 	}
 

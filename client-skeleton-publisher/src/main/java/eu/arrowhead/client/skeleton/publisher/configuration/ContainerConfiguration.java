@@ -17,12 +17,13 @@ public class ContainerConfiguration implements WebServerFactoryCustomizer<Tomcat
 	@Autowired
 	ContainerConfProperties containerConfProperties;
 	
-	private final Logger log = LogManager.getLogger( ContainerConfiguration.class);
+	private final Logger log = LogManager.getLogger(ContainerConfiguration.class);
 	
 	//=================================================================================================
 	// methods
 
 	//-------------------------------------------------------------------------------------------------	
+	@SuppressWarnings("rawtypes")
 	@Override
 	public void customize(TomcatServletWebServerFactory factory) {
 		 factory.addConnectorCustomizers(connector -> {
@@ -30,7 +31,6 @@ public class ContainerConfiguration implements WebServerFactoryCustomizer<Tomcat
 
 	            protocol.setMaxKeepAliveRequests(containerConfProperties.getMaxKeepAliveRequests());
 
-	            //
 	            log.info("####################################################################################");
 	            log.info("#");
 	            log.info("# TomcatCustomizer");
@@ -41,9 +41,7 @@ public class ContainerConfiguration implements WebServerFactoryCustomizer<Tomcat
 	            log.info("# connection timeout: {} ms", protocol.getConnectionTimeout());
 	            log.info("# max connections: {}", protocol.getMaxConnections());
 	            log.info("#");
-	            log.info(
-	                "####################################################################################");
+	            log.info("####################################################################################");
 		 });
 	}
-
 }
