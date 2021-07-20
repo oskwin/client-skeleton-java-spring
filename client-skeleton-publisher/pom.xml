@@ -2,9 +2,9 @@
 	<modelVersion>4.0.0</modelVersion>
 	
 	<parent>
-    	<groupId>eu.arrowhead</groupId>
-    	<artifactId>client-skeleton</artifactId>
-    	<version>4.4.1</version>
+    	<groupId>eu.arrowhead</groupId>	
+		<artifactId>application-skeleton-java-spring</artifactId>
+		<version>4.4.0.0</version>
   	</parent>
 	
 	<artifactId>arrowhead-client-skeleton-publisher</artifactId>
