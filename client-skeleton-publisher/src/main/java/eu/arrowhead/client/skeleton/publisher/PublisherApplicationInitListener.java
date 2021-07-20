@@ -82,8 +82,7 @@ public class PublisherApplicationInitListener extends ApplicationInitListener {
 			logger.info("TokenSecurityFilter in not active");
 		}
 		
-		if ( arrowheadService.echoCoreSystem(CoreSystem.EVENTHANDLER) ) {
-			
+		if (arrowheadService.echoCoreSystem(CoreSystem.EVENTHANDLER)) {
 			arrowheadService.updateCoreServiceURIs(CoreSystem.EVENTHANDLER);	
 			
 			publishInitStartedEvent();

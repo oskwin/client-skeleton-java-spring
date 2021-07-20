@@ -91,8 +91,7 @@ public class SubscriberApplicationInitListener extends ApplicationInitListener {
 
 		}
 
-
-		if ( arrowheadService.echoCoreSystem(CoreSystem.EVENTHANDLER)) {
+		if (arrowheadService.echoCoreSystem(CoreSystem.EVENTHANDLER)) {
 			arrowheadService.updateCoreServiceURIs(CoreSystem.EVENTHANDLER);
 			subscribeToPresetEvents();
 		}
