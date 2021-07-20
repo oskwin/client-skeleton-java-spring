@@ -10,8 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import eu.arrowhead.client.library.ArrowheadService;
-import eu.arrowhead.client.library.util.ClientCommonConstants;
+import ai.aitia.arrowhead.application.library.ArrowheadService;
+import ai.aitia.arrowhead.application.library.util.ApplicationCommonConstants;
 import eu.arrowhead.client.skeleton.publisher.PublisherApplicationInitListener;
 import eu.arrowhead.client.skeleton.publisher.event.PresetEventType;
 import eu.arrowhead.common.CommonConstants;
@@ -24,13 +24,13 @@ public class PublisherService {
     //=================================================================================================
 	// members
 	
-	@Value(ClientCommonConstants.$CLIENT_SYSTEM_NAME)
+	@Value(ApplicationCommonConstants.$APPLICATION_SYSTEM_NAME)
 	private String clientSystemName;
 	
-	@Value(ClientCommonConstants.$CLIENT_SERVER_ADDRESS_WD)
+	@Value(ApplicationCommonConstants.$APPLICATION_SERVER_ADDRESS_WD)
 	private String clientSystemAddress;
 	
-	@Value(ClientCommonConstants.$CLIENT_SERVER_PORT_WD)
+	@Value(ApplicationCommonConstants.$APPLICATION_SERVER_PORT_WD)
 	private int clientSystemPort;
 	
 	@Value(CommonConstants.$SERVER_SSL_ENABLED_WD)

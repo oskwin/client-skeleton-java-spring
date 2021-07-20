@@ -14,8 +14,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 
-import eu.arrowhead.client.library.ArrowheadService;
-import eu.arrowhead.client.library.util.ClientCommonConstants;
+import ai.aitia.arrowhead.application.library.ArrowheadService;
+import ai.aitia.arrowhead.application.library.util.ApplicationCommonConstants;
 import eu.arrowhead.client.skeleton.publisher.constants.PublisherConstants;
 import eu.arrowhead.client.skeleton.publisher.event.PresetEventType;
 import eu.arrowhead.common.CommonConstants;
@@ -30,13 +30,13 @@ public class PublisherMain implements ApplicationRunner {
     //=================================================================================================
 	// members
 	
-	@Value(ClientCommonConstants.$CLIENT_SYSTEM_NAME)
+	@Value(ApplicationCommonConstants.$APPLICATION_SYSTEM_NAME)
 	private String clientSystemName;
 	
-	@Value(ClientCommonConstants.$CLIENT_SERVER_ADDRESS_WD)
+	@Value(ApplicationCommonConstants.$APPLICATION_SERVER_ADDRESS_WD)
 	private String clientSystemAddress;
 	
-	@Value(ClientCommonConstants.$CLIENT_SERVER_PORT_WD)
+	@Value(ApplicationCommonConstants.$APPLICATION_SERVER_PORT_WD)
 	private int clientSystemPort;
 	
 	@Value(CommonConstants.$SERVER_SSL_ENABLED_WD)
