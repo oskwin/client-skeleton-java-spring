@@ -18,9 +18,9 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 
-import eu.arrowhead.client.library.ArrowheadService;
-import eu.arrowhead.client.library.config.ApplicationInitListener;
-import eu.arrowhead.client.library.util.ClientCommonConstants;
+import ai.aitia.arrowhead.application.library.ArrowheadService;
+import ai.aitia.arrowhead.application.library.config.ApplicationInitListener;
+import ai.aitia.arrowhead.application.library.util.ApplicationCommonConstants;
 import eu.arrowhead.client.skeleton.publisher.constants.PublisherConstants;
 import eu.arrowhead.client.skeleton.publisher.event.PresetEventType;
 import eu.arrowhead.client.skeleton.publisher.security.PublisherSecurityConfig;
@@ -43,19 +43,19 @@ public class PublisherApplicationInitListener extends ApplicationInitListener {
 	@Autowired
 	private PublisherSecurityConfig publisherSecurityConfig;
 	
-	@Value(ClientCommonConstants.$TOKEN_SECURITY_FILTER_ENABLED_WD)
+	@Value(ApplicationCommonConstants.$TOKEN_SECURITY_FILTER_ENABLED_WD)
 	private boolean tokenSecurityFilterEnabled;
 	
 	@Value(CommonConstants.$SERVER_SSL_ENABLED_WD)
 	private boolean sslEnabled;
 	
-	@Value(ClientCommonConstants.$CLIENT_SYSTEM_NAME)
+	@Value(ApplicationCommonConstants.$APPLICATION_SYSTEM_NAME)
 	private String clientSystemName;
 	
-	@Value(ClientCommonConstants.$CLIENT_SERVER_ADDRESS_WD)
+	@Value(ApplicationCommonConstants.$APPLICATION_SERVER_ADDRESS_WD)
 	private String clientSystemAddress;
 	
-	@Value(ClientCommonConstants.$CLIENT_SERVER_PORT_WD)
+	@Value(ApplicationCommonConstants.$APPLICATION_SERVER_PORT_WD)
 	private int clientSystemPort;
 	
 	private final Logger logger = LogManager.getLogger(PublisherApplicationInitListener.class);
@@ -68,7 +68,7 @@ public class PublisherApplicationInitListener extends ApplicationInitListener {
 	protected void customInit(final ContextRefreshedEvent event) {
 
 		//Checking the availability of necessary core systems
-		checkCoreSystemReachability(CoreSystem.SERVICE_REGISTRY);
+		checkCoreSystemReachability(CoreSystem.SERVICEREGISTRY);
 		
 		if (sslEnabled && tokenSecurityFilterEnabled) {
 			checkCoreSystemReachability(CoreSystem.AUTHORIZATION);			
@@ -82,9 +82,9 @@ public class PublisherApplicationInitListener extends ApplicationInitListener {
 			logger.info("TokenSecurityFilter in not active");
 		}
 		
-		if ( arrowheadService.echoCoreSystem(CoreSystem.EVENT_HANDLER) ) {
+		if ( arrowheadService.echoCoreSystem(CoreSystem.EVENTHANDLER) ) {
 			
-			arrowheadService.updateCoreServiceURIs(CoreSystem.EVENT_HANDLER);	
+			arrowheadService.updateCoreServiceURIs(CoreSystem.EVENTHANDLER);	
 			
 			publishInitStartedEvent();
 		}
