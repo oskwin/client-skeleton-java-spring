@@ -5,10 +5,15 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import eu.arrowhead.application.skeleton.executor.service.ExecutorService;
 import eu.arrowhead.common.CommonConstants;
+import eu.arrowhead.common.dto.shared.ChoreographerAbortStepRequestDTO;
+import eu.arrowhead.common.dto.shared.ChoreographerExecuteStepRequestDTO;
+import eu.arrowhead.common.dto.shared.ChoreographerExecutorServiceInfoRequestDTO;
+import eu.arrowhead.common.dto.shared.ChoreographerExecutorServiceInfoResponseDTO;
 
 @RestController
 public class ExecutorController {
@@ -31,17 +36,21 @@ public class ExecutorController {
 	}
 	
 	//-------------------------------------------------------------------------------------------------
-	@PostMapping(path = "/start", produces = MediaType.APPLICATION_JSON_VALUE) //TODO: use values from CommonConstans after new release of client library
-	public void start(@RequestBody final Object request) { //TODO: change input to ChoreographerExecuteStepRequestDTO after new release
-		//TODO validate
+	@PostMapping(path = CommonConstants.CHOREOGRAPHER_EXECUTOR_CLIENT_SERVICE_START_URI, produces = MediaType.APPLICATION_JSON_VALUE)
+	public void start(@RequestBody final ChoreographerExecuteStepRequestDTO request) {
 		executorService.startExecution(request);
 	}
 	
 	//-------------------------------------------------------------------------------------------------
-	@PostMapping(path = "/abort", produces = MediaType.APPLICATION_JSON_VALUE) //TODO: use values from CommonConstans after new release of client library
-	public void abort(@RequestBody final Object request) { //TODO: change input to ChoreographerAbortStepRequestDTO after new release
-		//TODO validate
+	@PostMapping(path = CommonConstants.CHOREOGRAPHER_EXECUTOR_CLIENT_SERVICE_ABORT_URI, produces = MediaType.APPLICATION_JSON_VALUE)
+	public void abort(@RequestBody final ChoreographerAbortStepRequestDTO request) {
 		executorService.abortExecution(request);
+	}
+	
+	//-------------------------------------------------------------------------------------------------
+	@PostMapping(path = CommonConstants.CHOREOGRAPHER_EXECUTOR_CLIENT_SERVICE_INFO_URI, produces = MediaType.APPLICATION_JSON_VALUE)
+	@ResponseBody public ChoreographerExecutorServiceInfoResponseDTO serviceInfo(@RequestBody final ChoreographerExecutorServiceInfoRequestDTO request) {
+		return executorService.collectServiceInfo(request);
 	}
 	
 	//-------------------------------------------------------------------------------------------------
