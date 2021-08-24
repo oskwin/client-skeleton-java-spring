@@ -48,7 +48,7 @@ public class ExecutorController {
 	}
 	
 	//-------------------------------------------------------------------------------------------------
-	@PostMapping(path = CommonConstants.CHOREOGRAPHER_EXECUTOR_CLIENT_SERVICE_INFO_URI, produces = MediaType.APPLICATION_JSON_VALUE)
+	@PostMapping(path = CommonConstants.CHOREOGRAPHER_EXECUTOR_CLIENT_SERVICE_INFO_URI, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody public ChoreographerExecutorServiceInfoResponseDTO serviceInfo(@RequestBody final ChoreographerExecutorServiceInfoRequestDTO request) {
 		return executorService.collectServiceInfo(request);
 	}

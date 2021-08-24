@@ -8,7 +8,7 @@
   	</parent>
 	
 	<artifactId>arrowhead-application-skeleton-executor</artifactId>
-	<name>Arrowhead Provider Skeleton</name>
+	<name>Arrowhead Executor Skeleton</name>
 	
 	<build>
 		<plugins>

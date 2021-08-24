@@ -26,7 +26,8 @@ public class ExecutorAccessControlFilter extends AccessControlFilter {
 		final String cloudCN = getServerCloudCN();
 		
 		if (requestTarget.contains(CommonConstants.CHOREOGRAPHER_EXECUTOR_CLIENT_SERVICE_START_URI) ||
-			requestTarget.contains(CommonConstants.CHOREOGRAPHER_EXECUTOR_CLIENT_SERVICE_ABORT_URI)) {
+			requestTarget.contains(CommonConstants.CHOREOGRAPHER_EXECUTOR_CLIENT_SERVICE_ABORT_URI) ||
+			requestTarget.contains(CommonConstants.CHOREOGRAPHER_EXECUTOR_CLIENT_SERVICE_INFO_URI)) {
 			//Only Choreographer Core System is allowed to call this endpoints
 			checkIfClientIsChoreographer(clientCN, cloudCN);			
 		}
