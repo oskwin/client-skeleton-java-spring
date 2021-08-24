@@ -28,7 +28,8 @@
 	    <module>application-skeleton-provider</module>
 	    <module>application-skeleton-subscriber</module>
 	    <module>application-skeleton-publisher</module>
-  	</modules>
+	    <module>application-skeleton-executor</module>
+	</modules>
 	
 	<repositories>
 		<repository>

@@ -27,6 +27,7 @@ wrapper
 /application-skeleton-consumer/target
 /application-skeleton-publisher/target
 /application-skeleton-subscriber/target
+/application-skeleton-executor/target
 /mvnw
 /mvnw.cmd
 /.settings
