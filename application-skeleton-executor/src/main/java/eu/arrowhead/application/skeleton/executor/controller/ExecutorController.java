@@ -16,6 +16,7 @@ import eu.arrowhead.common.dto.shared.ChoreographerExecutorServiceInfoRequestDTO
 import eu.arrowhead.common.dto.shared.ChoreographerExecutorServiceInfoResponseDTO;
 
 @RestController
+//@RequestMapping("/executor") // TODO: specify the base URI here
 public class ExecutorController {
 
 	//=================================================================================================
@@ -36,13 +37,13 @@ public class ExecutorController {
 	}
 	
 	//-------------------------------------------------------------------------------------------------
-	@PostMapping(path = CommonConstants.CHOREOGRAPHER_EXECUTOR_CLIENT_SERVICE_START_URI, produces = MediaType.APPLICATION_JSON_VALUE)
+	@PostMapping(path = CommonConstants.CHOREOGRAPHER_EXECUTOR_CLIENT_SERVICE_START_URI, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public void start(@RequestBody final ChoreographerExecuteStepRequestDTO request) {
 		executorService.startExecution(request);
 	}
 	
 	//-------------------------------------------------------------------------------------------------
-	@PostMapping(path = CommonConstants.CHOREOGRAPHER_EXECUTOR_CLIENT_SERVICE_ABORT_URI, produces = MediaType.APPLICATION_JSON_VALUE)
+	@PostMapping(path = CommonConstants.CHOREOGRAPHER_EXECUTOR_CLIENT_SERVICE_ABORT_URI, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public void abort(@RequestBody final ChoreographerAbortStepRequestDTO request) {
 		executorService.abortExecution(request);
 	}
@@ -54,5 +55,5 @@ public class ExecutorController {
 	}
 	
 	//-------------------------------------------------------------------------------------------------
-	//TODO: implement here your provider related REST end points
+	//TODO: implement here your executor related REST end points
 }
