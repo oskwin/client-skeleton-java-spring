@@ -66,7 +66,8 @@ public class PublisherApplicationInitListener extends ApplicationInitListener {
 	//-------------------------------------------------------------------------------------------------
 	@Override
 	protected void customInit(final ContextRefreshedEvent event) {
-
+		checkConfiguration();
+		
 		//Checking the availability of necessary core systems
 		checkCoreSystemReachability(CoreSystem.SERVICEREGISTRY);
 		
@@ -99,6 +100,14 @@ public class PublisherApplicationInitListener extends ApplicationInitListener {
 	
 	//=================================================================================================
 	// assistant methods
+	
+	//-------------------------------------------------------------------------------------------------
+	private void checkConfiguration() {
+		if (!sslEnabled && tokenSecurityFilterEnabled) {			 
+			logger.info("Contradictory configuration:");
+			logger.info("token.security.filter.enabled=true while server.ssl.enabled=false");
+		}
+	}
 
 	//-------------------------------------------------------------------------------------------------
 	private void setTokenSecurityFilter() {
