@@ -40,7 +40,27 @@ public class PubSubApplicationInitListener extends ApplicationInitListener imple
 	
 	@Autowired
 	private ArrowheadService arrowheadService;
+
+  //@Value(CommonConstants.$APPLICATION_SYSTEM_NAME)
+  @Value("${application_system_name}")
+	private String systemName;
+
+  //@Value(CommonConstants.$MQTT_BROKER_ADDRES)
+  @Value("${mqtt.broker.address}")
+	private String brokerAddress;
+
+  //@Value(CommonConstants.$MQTT_BROKER_PORT)
+  @Value("${mqtt.broker.port}")
+	private int brokerPort;
+
+  //@Value(CommonConstants.$MQTT_BROKER_USERNAME)
+  @Value("${mqtt.broker.username}")
+	private String brokerUsername;
 	
+  //@Value(CommonConstants.$MQTT_BROKER_PASSWORD)
+  @Value("${mqtt.broker.password}")
+	private String brokerPassword;
+
 	@Value(CommonConstants.$SERVER_SSL_ENABLED_WD)
 	private boolean sslEnabled;
 	
@@ -54,16 +74,13 @@ public class PubSubApplicationInitListener extends ApplicationInitListener imple
 	@Override
 	protected void customInit(final ContextRefreshedEvent event) {
 		
-		//Checking the availability of necessary core systems
-		//checkCoreSystemReachability(CoreSystem.SERVICEREGISTRY);
-		//checkCoreSystemReachability(CoreSystem.AUTHORIZATION);
-
-		//Initialize Arrowhead Context
-		//arrowheadService.updateCoreServiceURIs(CoreSystem.AUTHORIZATION);	
-		
 		//TODO: implement here any custom behavior on application start up
     try {
-      client = arrowheadService.connectMQTTBroker(this, "127.0.0.1", 1883, "pubsub", "badpassword", "pubsub01");
+      client = arrowheadService.connectMQTTBroker(this, brokerAddress, brokerPort, brokerUsername, brokerPassword, systemName);
+		
+      //Checking the availability of necessary core systems  add MQTT support here as well 
+  		//checkCoreSystemReachability(CoreSystem.SERVICEREGISTRY); add MQTT support here as well
+	  	//checkCoreSystemReachability(CoreSystem.AUTHORIZATION); add MQTT support here as well
       client.subscribe("ah/pubsub/messages");
     } catch (Exception e) {
       client = null;
