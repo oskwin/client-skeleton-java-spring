@@ -45,7 +45,7 @@ public class PubSubApplicationInitListener extends ApplicationInitListener imple
   @Value("${application_system_name}")
 	private String systemName;
 
-  //@Value(CommonConstants.$MQTT_BROKER_ADDRES)
+  //@Value(CommonConstants.$MQTT_BROKER_ADDRESS)
   @Value("${mqtt.broker.address}")
 	private String brokerAddress;
 
@@ -78,9 +78,9 @@ public class PubSubApplicationInitListener extends ApplicationInitListener imple
     try {
       client = arrowheadService.connectMQTTBroker(this, brokerAddress, brokerPort, brokerUsername, brokerPassword, systemName);
 		
-      //Checking the availability of necessary core systems  add MQTT support here as well 
-  		//checkCoreSystemReachability(CoreSystem.SERVICEREGISTRY); add MQTT support here as well
-	  	//checkCoreSystemReachability(CoreSystem.AUTHORIZATION); add MQTT support here as well
+      //Checking the availability of necessary core systems  add MQTT support here as well?
+  		//checkCoreSystemReachability(CoreSystem.SERVICEREGISTRY); add MQTT support here as well?
+	  	//checkCoreSystemReachability(CoreSystem.AUTHORIZATION); add MQTT support here as well?
       client.subscribe("ah/pubsub/messages");
     } catch (Exception e) {
       client = null;
@@ -91,7 +91,7 @@ public class PubSubApplicationInitListener extends ApplicationInitListener imple
 	//-------------------------------------------------------------------------------------------------
 	@Override
 	public void customDestroy() {
-		//TODO: implement here any custom behavior on application shout down
+		//TODO: implement here any custom behavior on application shut down
     if (client != null) {
       try {
         arrowheadService.disconnectMQTTBroker(client);
@@ -117,7 +117,7 @@ public class PubSubApplicationInitListener extends ApplicationInitListener imple
   public void messageArrived(String topic, MqttMessage message) throws Exception {
     System.out.println("topic - " + topic + ": " + new String(message.getPayload()));
 
-		//TODO: implement here any custom behavior on incoming messages, filtered in topic
+		//TODO: implement here any custom behavior on incoming messages, such as filtering in topics etc
   }
 
   @Override
