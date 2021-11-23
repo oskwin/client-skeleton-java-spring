@@ -66,6 +66,7 @@ public class PubSubApplicationInitListener extends ApplicationInitListener imple
       client = arrowheadService.connectMQTTBroker(this, "127.0.0.1", 1883, "pubsub", "badpassword", "pubsub01");
       client.subscribe("ah/pubsub/messages");
     } catch (Exception e) {
+      client = null;
       throw new ArrowheadException("Could not connect to MQTT broker!\n" + e.toString());
     }
 	}
