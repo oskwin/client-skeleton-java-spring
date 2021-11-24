@@ -41,30 +41,30 @@ public class PubSubApplicationInitListener extends ApplicationInitListener imple
 	@Autowired
 	private ArrowheadService arrowheadService;
 
-  //@Value(CommonConstants.$APPLICATION_SYSTEM_NAME)
-  @Value("${application_system_name}")
+	//@Value(CommonConstants.$APPLICATION_SYSTEM_NAME)
+	@Value("${application_system_name}")
 	private String systemName;
 
-  //@Value(CommonConstants.$MQTT_BROKER_ADDRESS)
-  @Value("${mqtt.broker.address}")
+	//@Value(CommonConstants.$MQTT_BROKER_ADDRESS)
+	@Value("${mqtt.broker.address}")
 	private String brokerAddress;
 
-  //@Value(CommonConstants.$MQTT_BROKER_PORT)
-  @Value("${mqtt.broker.port}")
+	//@Value(CommonConstants.$MQTT_BROKER_PORT)
+	@Value("${mqtt.broker.port}")
 	private int brokerPort;
 
-  //@Value(CommonConstants.$MQTT_BROKER_USERNAME)
-  @Value("${mqtt.broker.username}")
+	//@Value(CommonConstants.$MQTT_BROKER_USERNAME)
+	@Value("${mqtt.broker.username}")
 	private String brokerUsername;
 	
-  //@Value(CommonConstants.$MQTT_BROKER_PASSWORD)
-  @Value("${mqtt.broker.password}")
+	//@Value(CommonConstants.$MQTT_BROKER_PASSWORD)
+	@Value("${mqtt.broker.password}")
 	private String brokerPassword;
 
 	@Value(CommonConstants.$SERVER_SSL_ENABLED_WD)
 	private boolean sslEnabled;
 	
-  MqttClient client = null;
+	MqttClient client = null;
 	private final Logger logger = LogManager.getLogger(PubSubApplicationInitListener.class);
 	
 	//=================================================================================================
@@ -74,55 +74,52 @@ public class PubSubApplicationInitListener extends ApplicationInitListener imple
 	@Override
 	protected void customInit(final ContextRefreshedEvent event) {
 		
-		//TODO: implement here any custom behavior on application start up
-    try {
-      client = arrowheadService.connectMQTTBroker(this, brokerAddress, brokerPort, brokerUsername, brokerPassword, systemName);
-		
-      //Checking the availability of necessary core systems  add MQTT support here as well?
-  		//checkCoreSystemReachability(CoreSystem.SERVICEREGISTRY); add MQTT support here as well?
-	  	//checkCoreSystemReachability(CoreSystem.AUTHORIZATION); add MQTT support here as well?
-      client.subscribe("ah/pubsub/messages");
-    } catch (Exception e) {
-      client = null;
-      throw new ArrowheadException("Could not connect to MQTT broker!\n" + e.toString());
-    }
+        //TODO: implement here any custom behavior on application start up
+        try {
+            client = arrowheadService.connectMQTTBroker(this, brokerAddress, brokerPort, brokerUsername, brokerPassword, systemName);
+
+            //Checking the availability of necessary core systems  add MQTT support here as well?
+            //checkCoreSystemReachability(CoreSystem.SERVICEREGISTRY); add MQTT support here as well?
+            //checkCoreSystemReachability(CoreSystem.AUTHORIZATION); add MQTT support here as well?
+            client.subscribe("ah/pubsub/messages");
+        } catch (Exception e) {
+            client = null;
+            throw new ArrowheadException("Could not connect to MQTT broker!\n" + e.toString());
+        }
 	}
 
 	//-------------------------------------------------------------------------------------------------
 	@Override
 	public void customDestroy() {
-		//TODO: implement here any custom behavior on application shut down
-    if (client != null) {
-      try {
-        arrowheadService.disconnectMQTTBroker(client);
-        arrowheadService.closeMQTTBroker(client);
-      } catch(Exception e) {
-      }
-
-      client = null;
+        //TODO: implement here any custom behavior on application shut down
+        if (client != null) {
+            try {
+                arrowheadService.disconnectMQTTBroker(client);
+                arrowheadService.closeMQTTBroker(client);
+            } catch(Exception e) {
+            }
+            client = null;
+        }
     }
-	}
 	
 	//=================================================================================================
 	// MQTT callback methods
 
-  @Override
-  public void connectionLost(Throwable t) {
-    System.out.println("connectionLost: " + t.toString());
+    @Override
+    public void connectionLost(Throwable t) {
 
-		//TODO: implement here any custom behavior on broker disconnect, typically a reconnect after a short timeout
-  }
+        //TODO: implement here any custom behavior on broker disconnect, typically a reconnect after a short timeout
+    }
 
-  @Override
-  public void messageArrived(String topic, MqttMessage message) throws Exception {
-    System.out.println("topic - " + topic + ": " + new String(message.getPayload()));
+    @Override
+    public void messageArrived(String topic, MqttMessage message) throws Exception {
 
-		//TODO: implement here any custom behavior on incoming messages, such as filtering in topics etc
-  }
+        //TODO: implement here any custom behavior on incoming messages, such as filtering in topics etc
+    }
 
-  @Override
-  public void deliveryComplete(IMqttDeliveryToken token) {
-  }
+    @Override
+    public void deliveryComplete(IMqttDeliveryToken token) {
+    }
 
 	//=================================================================================================
 	// assistant methods
