@@ -1,28 +1,28 @@
 {"properties": [
   {
-    "name": "client_system_name",
+    "name": "application_system_name",
     "type": "java.lang.String",
-    "description": "A description for 'client_system_name'"
+    "description": "A description for 'application_system_name'"
   },
   {
-    "name": "broker_address",
+    "name": "broker.address",
     "type": "java.lang.String",
-    "description": "A description for 'broker_address'"
+    "description": "A description for 'broker.address'"
   },
   {
-    "name": "broker_port",
-    "type": "java.lang.String",
-    "description": "A description for 'broker_port'"
+    "name": "broker.port",
+    "type": "java.lang.Integer",
+    "description": "A description for 'broker.port'"
   },
   {
-    "name": "broker_username",
+    "name": "broker.username",
     "type": "java.lang.String",
-    "description": "A description for 'broker_username'"
+    "description": "A description for 'broker.username'"
   },
   {
-    "name": "broker_password",
+    "name": "broker.password",
     "type": "java.lang.String",
-    "description": "A description for 'broker_password'"
+    "description": "A description for 'broker.password'"
   },
   {
     "name": "container.max_keep_alive_requests",
