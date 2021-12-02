@@ -21,7 +21,7 @@ import eu.arrowhead.common.dto.shared.ServiceQueryFormDTO;
 import eu.arrowhead.common.exception.ArrowheadException;
 
 @SpringBootApplication
-@ComponentScan(basePackages = {CommonConstants.BASE_PACKAGE}) //TODO: add custom packages if any
+@ComponentScan(basePackages = {CommonConstants.BASE_PACKAGE, "ai.aitia"}) //TODO: add custom packages if any
 public class ConsumerMain implements ApplicationRunner {
     
     //=================================================================================================

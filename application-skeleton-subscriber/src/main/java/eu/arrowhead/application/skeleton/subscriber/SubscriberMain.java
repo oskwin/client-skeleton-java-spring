@@ -23,7 +23,7 @@ import eu.arrowhead.common.exception.InvalidParameterException;
 
 @SpringBootApplication
 @EnableConfigurationProperties(ConfigEventProperites.class)
-@ComponentScan(basePackages = {CommonConstants.BASE_PACKAGE}) //TODO: add custom packages if any
+@ComponentScan(basePackages = {CommonConstants.BASE_PACKAGE, "ai.aitia"}) //TODO: add custom packages if any
 public class SubscriberMain implements ApplicationRunner {
 
     //=================================================================================================

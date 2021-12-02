@@ -24,7 +24,7 @@ import eu.arrowhead.common.dto.shared.EventPublishRequestDTO;
 import eu.arrowhead.common.dto.shared.SystemRequestDTO;
 
 @SpringBootApplication
-@ComponentScan(basePackages = {CommonConstants.BASE_PACKAGE}) //TODO: add custom packages if any
+@ComponentScan(basePackages = {CommonConstants.BASE_PACKAGE, "ai.aitia"}) //TODO: add custom packages if any
 public class PublisherMain implements ApplicationRunner {
 
     //=================================================================================================
